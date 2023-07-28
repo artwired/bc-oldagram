@@ -1,0 +1,110 @@
+@font-face {
+  font-family: "Source Sans";
+  src: url("fonts/SourceSansPro-Regular.otf") format("opentype"),
+    url("fonts/SourceSansPro-Bold.otf") format("opentype");
+}
+
+/* Josh Comeau CSS Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  color: black;
+  font-family: "Source Sans", sans-serif;
+  background-color: #c4c4c4;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Layout */
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: 13px;
+}
+main {
+  border-top: 1px solid #c6c6c6;
+}
+footer {
+  padding-bottom: 16px;
+  border-bottom: 25px solid #c4c4c4;
+}
+#logo {
+  width: 127px;
+}
+.avatar,
+#artist-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+.artist-name,
+.artist-location {
+  display: block;
+}
+.post-header {
+  display: flex;
+  gap: 7px;
+  padding: 10px;
+}
+.img-icons-container {
+  display: flex;
+  gap: 13px;
+  padding: 20px 10px 10px;
+}
+.comment-container {
+  display: flex;
+  gap: 3px;
+  margin-top: 10px;
+}
+.img-icons-container img {
+  width: 26px;
+}
+.likes-count,
+.comment-container {
+  padding-left: 10px;
+}
+/* Typography */
+
+.artist-name,
+.likes-count p,
+.username {
+  font-size: 13px;
+  font-weight: 700;
+}
+.artist-location {
+  font-size: 12px;
+}
+.comment {
+  font-size: 13px;
+}
+
+/* Interactive Elements */
+button:hover {
+  opacity: 0.3;
+}
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
