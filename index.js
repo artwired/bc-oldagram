@@ -38,48 +38,57 @@ const newPost = document.createElement("div");
 
 let likesCount = 0;
 
-for (let i = 0; i < posts.length; i++) {
-  newPost.innerHTML += `
+function getPostHtml() {
+  let postHtml = ``;
+
+  posts.forEach(function (post) {
+    postHtml += `
       <main>
         <div class="post-header">
           <div>
-            <img id="artist-avatar" src="${posts[i].avatar}" alt="" />
+            <img id="artist-avatar" src="${post.avatar}" alt="" />
           </div>
           <div class="name-and-location-container">
-            <p class="artist-name">${posts[i].name}</p>
-            <p class="artist-location">${posts[i].location}</p>
+            <p class="artist-name">${post.name}</p>
+            <p class="artist-location">${post.location}</p>
           </div>
         </div>
         <img
-          src="${posts[i].post}"
+          src="${post.post}"
           alt="image of the Oslo Self Portrait painting by Van Gogh"
         />
       </main>
       <footer class="post-footer-container">
         <div class="img-icons-container">
-          <button><img class="heart-icon" id="${posts[i].idTag}" src="images/icon-heart.png" alt="" /></button>
+          <button><img class="heart-icon" data-likes="${post.idTag}" src="images/icon-heart.png" alt="" /></button>
           <button><img class="comment-icon" src="images/icon-comment.png" alt="" /></button>
           <button><img class="dm-icon" src="images/icon-dm.png" alt="" /></button>
         </div>
-        <div><p class="likes-count">${posts[i].likes}</p></div>
+        <div><p class="likes-count">${post.likes}</p></div>
         <div class="comment-container">
-          <p class="username">${posts[i].username}</p>
-          <p class="comment">${posts[i].comment}</p>
+          <p class="username">${post.username}</p>
+          <p class="comment">${post.comment}</p>
         </div>
       </footer>
   `;
+  });
+  return postHtml;
 }
-postEl.append(newPost);
 
-let siteContainer = document.querySelector(".container");
-let heartIconEl = document.querySelectorAll(".heart-icon");
-let likesTotal = document.querySelector(".likes-count");
-
-function targetPost(e) {
-  likesCount += 1;
-
-  let likesCountContainer = document.getElementById(e.target.id).parentElement
-    .parentElement.nextElementSibling.children[0];
-  likesCountContainer.innerText = likesCount;
+document.addEventListener("click", function (e) {
+  if (e.target.dataset.likes) {
+    handleLikeClick(e.target.dataset.likes);
+  }
+});
+function handleLikeClick(likeId) {
+  const targetLikeObj = posts.filter((like) => {
+    return like.idTag === likeId;
+  })[0];
+  targetLikeObj.likes++;
+  render();
 }
-siteContainer.addEventListener("click", targetPost);
+function render() {
+  document.getElementById("post").innerHTML = getPostHtml();
+}
+
+render();
